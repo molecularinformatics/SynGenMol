@@ -4,18 +4,19 @@ SynGenMol is a goal-directed framework for synthesizable molecular generation. I
 
 This release contains two runnable PED-GeoDiff demonstrations that share one code path, one reaction-template asset, and one anonymized building-block pool. Both ship their published results so the numbers in the documentation can be checked without a GPU.
 
-| Demonstration | What it adds | Documentation | Results |
-|---|---|---|---|
-| Unconstrained generation | The baseline workflow: 2,000 building blocks, free choice of first building block | [`docs/demonstrations.md`](docs/demonstrations.md) | [`outputs/syngenmol_demo_unconstraint/results/`](outputs/syngenmol_demo_unconstraint/results/) |
-| Warhead-protected generation | A first-token constraint forcing every route to open with a Boc-protected primary amine, so each product carries exactly one maskable warhead site | [`docs/demonstrations.md`](docs/demonstrations.md) | [`outputs/syngenmol_demo_warhead_constraint/results/`](outputs/syngenmol_demo_warhead_constraint/results/) |
+**Unconstrained generation** is the baseline workflow: 2,000 building blocks with free choice of the first building block. Its published run is in [`outputs/syngenmol_demo_unconstraint/results/`](outputs/syngenmol_demo_unconstraint/results/).
+
+**Warhead-protected generation** adds a first-token constraint that forces every route to open with a Boc-protected primary amine, so each product carries exactly one maskable warhead site. Its published run is in [`outputs/syngenmol_demo_warhead_constraint/results/`](outputs/syngenmol_demo_warhead_constraint/results/).
+
+Both are documented in [`docs/demonstrations.md`](docs/demonstrations.md).
 
 The constrained demonstration is the same three commands as the unconstrained one plus one configuration key, `initial_building_block_constraint`, which intersects the reaction-compatible first-position tokens with a named anchor set during both PPO rollouts and generation, so the constraint cannot be violated by sampling.
 
 In both demonstrations the policy learns to sample higher-scoring products. Each figure below plots, over the 500 PPO updates of the published run, the mean PED-GeoDiff score of the 64-trajectory rollout batch and the highest score in that batch; the two share axis limits and can be read against each other.
 
-![PPO score curve for the unconstrained demonstration: batch mean and batch maximum PED-GeoDiff score over 500 PPO updates](docs/figures/ppo_curve_unconstrained.png)
+![PPO score curve for the unconstrained demonstration: batch mean and batch maximum PED-GeoDiff score over 500 PPO updates](https://github.com/molecularinformatics/SynGenMol/raw/main/docs/figures/ppo_curve_unconstrained.png)
 
-![PPO score curve for the warhead-protected demonstration: batch mean and batch maximum PED-GeoDiff score over 500 PPO updates](docs/figures/ppo_curve_warhead_constrained.png)
+![PPO score curve for the warhead-protected demonstration: batch mean and batch maximum PED-GeoDiff score over 500 PPO updates](https://github.com/molecularinformatics/SynGenMol/raw/main/docs/figures/ppo_curve_warhead_constrained.png)
 
 Vendor catalogs, trained checkpoints, full PPO metric histories, prepared search spaces, and third-party model assets are not included. Prepared search spaces regenerate deterministically from the shipped inputs, so published token IDs match on a re-run.
 
