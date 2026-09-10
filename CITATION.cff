@@ -1,0 +1,28 @@
+cff-version: 1.2.0
+message: "If you use SynGenMol, please cite this software. A method paper is in preparation; this entry will be updated with its citation once it is published."
+title: SynGenMol
+abstract: >-
+  A goal-directed framework for synthesizable molecular generation. SynGenMol
+  assembles products from building blocks and reaction SMARTS templates, masks
+  chemically incompatible choices during autoregressive decoding, and optimizes
+  a compact policy with PPO against a task-specific molecular oracle.
+type: software
+repository-code: "https://github.com/molecularinformatics/SynGenMol"
+version: 0.1.0.dev0
+license: MIT
+authors:
+  - given-names: Yifei
+    family-names: Wang
+  - given-names: Shiyun
+    family-names: Wa
+  - given-names: Simone
+    family-names: Sciabola
+  - given-names: Ye
+    family-names: Wang
+keywords:
+  - molecular generation
+  - synthesizability
+  - reinforcement learning
+  - proximal policy optimization
+  - cheminformatics
+  - drug discovery

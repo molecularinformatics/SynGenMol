@@ -1,0 +1,61 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "syngenmol"
+version = "0.1.0.dev0"
+description = "Goal-directed synthesizable molecular generation with dynamic chemical-compatibility masking"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [
+  { name = "Yifei Wang" },
+  { name = "Shiyun Wa" },
+  { name = "Simone Sciabola" },
+  { name = "Ye Wang" },
+]
+classifiers = [
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+  "Intended Audience :: Science/Research",
+  "Topic :: Scientific/Engineering :: Chemistry",
+  "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+dependencies = [
+  "numpy>=1.26,<3",
+  "pandas>=2.2,<3",
+  "PyYAML>=6.0,<7",
+  "rdkit>=2023.9",
+  "tokenizers>=0.21,<0.22",
+  "torch>=2.6,<2.7",
+  "tqdm>=4.66,<5",
+  "transformers>=4.50,<4.52",
+]
+
+[project.optional-dependencies]
+training = [
+  "accelerate>=0.33,<2",
+  "datasets>=2.19,<4",
+  "trl==0.11.4",
+]
+ped-molformer = [
+  "tokenizers>=0.21,<0.22",
+  "torch>=2.6,<2.7",
+  "transformers>=4.50,<4.52",
+]
+ped-geodiff = [
+  "easydict>=1.13,<2",
+  "torch>=2.6,<2.7",
+  "torch-geometric>=2.6,<3",
+  "torch-scatter>=2.1,<3",
+]
+[project.scripts]
+syngenmol = "syngenmol.cli.main:main"
+
+[tool.setuptools]
+package-dir = { "" = "src" }
+
+[tool.setuptools.packages.find]
+where = ["src"]
+

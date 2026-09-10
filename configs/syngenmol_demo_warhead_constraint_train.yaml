@@ -1,0 +1,69 @@
+# Runtime configuration for the compact Boc-protected warhead-constraint demo.
+# Paths are relative to the repository root; run every command from there.
+search_space: outputs/syngenmol_demo_warhead_constraint/search_space
+output_dir: outputs/syngenmol_demo_warhead_constraint/training
+device: cuda
+seed: 20260908
+
+# The exact initial-token set contains only single-site, Boc-protected primary
+# amines. It constrains the policy during PPO rollouts as well as later
+# candidate generation.
+initial_building_block_constraint:
+  names_file: data/example/syngenmol_demo_warhead_constraint_anchor_names.txt
+
+model:
+  n_embd: 64
+  n_layer: 2
+  n_head: 2
+
+# Task-specific terminal-value warm-up. It jointly updates the Transformer
+# trunk and value head from the fixed, constrained, GeoDiff-scored pool.
+warmup:
+  trajectories_csv: data/example/syngenmol_demo_warhead_constraint_warmup_trajectories.csv
+  score_column: score
+  sequence_column: name
+  epochs: 10
+  batch_size: 64
+  learning_rate: 1.0e-4
+  validation_fraction: 0.2
+  split_seed: 20260908
+  device: cuda
+
+# Generation and optimization are performed on Boc-protected intermediates and
+# compared with a Boc-protected reference. Deprotection and crotonylation are
+# deliberately deferred to a post-generation transformation step.
+oracle:
+  name: ped_geodiff
+  reference_smiles: "CC(C)(C)OC(=O)N[C@H]1CCCN(c2c(F)cc(C(N)=O)c3[nH]c(C)c(C)c23)C1"
+  checkpoint_path: "${SYNGENMOL_GEODIFF_CHECKPOINT}"
+  embedding_mode: "3D"
+  distance_metric: euclidean
+  batch_size: 64
+  num_workers: 16
+  device: cuda
+  seed: 42
+  invalid_score: 0.0
+  transformation:
+    high: 10.0
+    low: 1.0
+    k: -0.25
+
+ppo:
+  # Each update samples and GeoDiff-scores 64 newly generated constrained
+  # trajectories. 500 updates therefore evaluate 32,000 rollout positions.
+  steps: 500
+  max_reactions: 1
+  batch_size: 64
+  mini_batch_size: 64
+  learning_rate: 1.0e-4
+  initial_kl_coefficient: 0.05
+  clip_range: 0.2
+  value_clip_range: 0.2
+  value_loss_coefficient: 0.5
+  gamma: 1.0
+  lam: 0.95
+  entropy_coefficient: 0.0
+  ppo_epochs: 4
+  temperature: 1.0
+  top_p: 1.0
+  epsilon: 0.0

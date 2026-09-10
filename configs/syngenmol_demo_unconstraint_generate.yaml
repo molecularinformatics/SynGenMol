@@ -1,0 +1,34 @@
+# Run from the repository root after the training configuration has completed.
+search_space: outputs/syngenmol_demo_unconstraint/search_space
+checkpoint: outputs/syngenmol_demo_unconstraint/training/model_final.pt
+output: outputs/syngenmol_demo_unconstraint/generated_molecules_geodiff.csv
+device: cuda
+
+model:
+  n_embd: 64
+  n_layer: 2
+  n_head: 2
+
+oracle:
+  name: ped_geodiff
+  reference_smiles: "C/C=C/C(=O)N[C@H]1CCCN(c2c(F)cc(C(N)=O)c3[nH]c(C)c(C)c23)C1"
+  checkpoint_path: "${SYNGENMOL_GEODIFF_CHECKPOINT}"
+  embedding_mode: "3D"
+  distance_metric: euclidean
+  batch_size: 64
+  num_workers: 16
+  device: cuda
+  seed: 42
+  invalid_score: 0.0
+  transformation:
+    high: 10.0
+    low: 1.0
+    k: -0.25
+
+generation:
+  num_molecules: 1000
+  max_reactions: 1
+  temperature: 1.0
+  top_p: 1.0
+  epsilon: 0.0
+  seed: 20260905

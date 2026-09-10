@@ -1,0 +1,58 @@
+{
+  "name": "syngenmol_demo_unconstraint",
+  "created": "2026-09-04",
+  "purpose": "Compact public workflow demonstration for SynGenMol preprocessing, task-specific warm-up, PPO, and final generation.",
+  "reference_smiles": "C/C=C/C(=O)N[C@H]1CCCN(c2c(F)cc(C(N)=O)c3[nH]c(C)c(C)c23)C1",
+  "building_blocks": {
+    "file": "syngenmol_demo_unconstraint_building_blocks.csv",
+    "rows": 2000,
+    "columns": [
+      "name",
+      "smiles"
+    ],
+    "identifier_format": "BB-0000 through BB-1999",
+    "sha256": "54892f8991809fb0edc371e958d6fb1fbdc4ba5a50a38a6f3e0c9a579cdde550"
+  },
+  "warmup_trajectories": {
+    "file": "syngenmol_demo_unconstraint_warmup_trajectories.csv",
+    "rows": 4000,
+    "unique_products": 4000,
+    "sha256": "4af54ee21499ef9bd4f0bc03a437e0955d47e48625c2a902b54f342673cb2c17",
+    "score_summary": {
+      "mean": 0.44666519230665164,
+      "median": 0.47189459461535843,
+      "minimum": 0.0,
+      "maximum": 0.8635006421110615,
+      "count_at_or_above_0.75": 175,
+      "count_at_or_above_0.80": 38,
+      "count_at_or_above_0.82": 13,
+      "count_at_or_above_0.85": 2,
+      "zero_scores": 4
+    }
+  },
+  "warmup_sampling": {
+    "strategy": "random-balanced",
+    "reaction_depth": 1,
+    "seed": 20260904,
+    "usage_weight": "(1 + prior_accepted_uses)^(-1)",
+    "maximum_accepted_uses_per_building_block": 10
+  },
+  "geodiff_scoring": {
+    "adapter": "PED-derived GeoDiff adapter included in SynGenMol",
+    "embedding_mode": "3D",
+    "distance_metric": "euclidean",
+    "seed": 42,
+    "transformation": {
+      "high": 10.0,
+      "low": 1.0,
+      "k": -0.25
+    },
+    "external_assets_distributed": false
+  },
+  "scope": {
+    "supplier_identifiers_included": false,
+    "source_to_anonymized_mapping_included": false,
+    "intended_as_complete_catalog": false,
+    "intended_as_unbiased_benchmark": false
+  }
+}

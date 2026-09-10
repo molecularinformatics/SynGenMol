@@ -1,0 +1,39 @@
+# Generate protected candidates only after the paired constrained PPO run.
+search_space: outputs/syngenmol_demo_warhead_constraint/search_space
+checkpoint: outputs/syngenmol_demo_warhead_constraint/training/model_final.pt
+output: outputs/syngenmol_demo_warhead_constraint/generated_molecules_geodiff.csv
+device: cuda
+
+initial_building_block_constraint:
+  names_file: data/example/syngenmol_demo_warhead_constraint_anchor_names.txt
+
+model:
+  n_embd: 64
+  n_layer: 2
+  n_head: 2
+
+oracle:
+  name: ped_geodiff
+  reference_smiles: "CC(C)(C)OC(=O)N[C@H]1CCCN(c2c(F)cc(C(N)=O)c3[nH]c(C)c(C)c23)C1"
+  checkpoint_path: "${SYNGENMOL_GEODIFF_CHECKPOINT}"
+  embedding_mode: "3D"
+  distance_metric: euclidean
+  batch_size: 64
+  num_workers: 16
+  device: cuda
+  seed: 42
+  invalid_score: 0.0
+  transformation:
+    high: 10.0
+    low: 1.0
+    k: -0.25
+
+generation:
+  # A 1,000-molecule protected candidate list is sufficient for this compact
+  # end-to-end demonstration and remains separate from later warhead installation.
+  num_molecules: 1000
+  max_reactions: 1
+  temperature: 1.0
+  top_p: 1.0
+  epsilon: 0.0
+  seed: 20260908

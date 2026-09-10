@@ -1,0 +1,52 @@
+# Python and local environments
+__pycache__/
+*.py[cod]
+*.so
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+.venv/
+venv/
+.env
+.envrc
+.idea/
+.vscode/
+.DS_Store
+
+# Generated search spaces, training products, and scheduler artifacts
+/artifacts/
+/outputs/
+/checkpoints/
+# ...except the two published demonstrations, which are part of the release.
+# Git only matches files whose parent directories are themselves re-admitted,
+# so each level is unignored before its contents are selected.
+!/outputs/
+/outputs/*
+!/outputs/syngenmol_demo_unconstraint/
+/outputs/syngenmol_demo_unconstraint/*
+!/outputs/syngenmol_demo_unconstraint/results/
+!/outputs/syngenmol_demo_warhead_constraint/
+/outputs/syngenmol_demo_warhead_constraint/*
+!/outputs/syngenmol_demo_warhead_constraint/results/
+/wandb/
+/logs/
+/cache/
+/models/
+*.slurm
+slurm-*.out
+slurm-*.err
+*.pt
+*.pth
+*.ckpt
+*.bin
+*.pkl
+*.pickle
+
+# User-managed source catalogs and third-party model assets
+hf-cache/
+third_party_models/
+vendor_data/
+*.sdf
+*.sdf.gz

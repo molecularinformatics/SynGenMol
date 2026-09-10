@@ -1,0 +1,39 @@
+{
+  "workflow": "Unconstrained goal-directed generation (no first-token constraint)",
+  "warmup": {
+    "trajectories": 4000,
+    "epochs": 10,
+    "mean_score": 0.4466651976108551,
+    "score_std": 0.2056897133588791,
+    "final_train_loss": 0.31252742737531664,
+    "final_validation_loss": 1.0367591426922724
+  },
+  "ppo": {
+    "updates": 500,
+    "rollout_batch_size": 64,
+    "early_updates_1_100_mean_score": 0.5398823659588813,
+    "late_updates_401_500_mean_score": 0.701607531420762,
+    "best_rollout_mean_score": 0.768709636927858,
+    "best_rollout_individual_score": 0.872541285017452,
+    "reference_policy_refreshes": 167,
+    "updates_with_any_score_at_or_above_0.80": 337
+  },
+  "generation": {
+    "unique_products": 1000,
+    "unique_building_block_pairs": 303,
+    "unique_reaction_id_sets": 54,
+    "mean_score": 0.6086237529357985,
+    "median_score": 0.6475868890740213,
+    "top_10_mean_score": 0.8468302064647034,
+    "top_100_mean_score": 0.8130927997573909,
+    "maximum_score": 0.8676487118293357,
+    "minimum_score": 0.015603962108361734,
+    "count_at_or_above": {
+      "0.7": 373,
+      "0.75": 230,
+      "0.8": 75,
+      "0.82": 30,
+      "0.85": 1
+    }
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "name": "syngenmol_demo_warhead_constraint",
+  "created": "2026-09-04",
+  "base_building_blocks": 2000,
+  "added_primary_amines": 200,
+  "added_high_score_route_anchors": 100,
+  "added_random_primary_amines": 100,
+  "merged_building_blocks": 2200,
+  "single_primary_amine_warhead_anchors_after_merge": 678,
+  "existing_single_primary_amine_anchors": 478,
+  "existing_multi_primary_amine_entries_excluded_from_anchor_set": 10,
+  "active_smiles_duplicates_after_merge": 0,
+  "high_score_anchor_selection": {
+    "source_score_min": 0.8126979754404398,
+    "source_score_median": 0.8350074826238949,
+    "source_score_max": 0.8887213858283101,
+    "selection_filter": "recorded route with a non-anchor partner already present in the existing 2,000-BB set",
+    "incompatible_candidates_skipped": 0
+  },
+  "random_anchor_selection": {
+    "seed": 20260904,
+    "primary_amine_candidates_examined": 100,
+    "selection_filter": "unique mono-Boc primary amine with a first-position SMARTS-compatible base partner"
+  },
+  "primary_amine_query": "[NH2;!$(N-C=[O,N,S]);!$(n)]",
+  "boc_reaction_smarts": "[$([NH2;!$(N-C=[O,N,S]);!$(n)]):1]>>[NH:1]C(=O)OC(C)(C)C",
+  "input_checksums": {
+    "base_2000_building_blocks": "54892f8991809fb0edc371e958d6fb1fbdc4ba5a50a38a6f3e0c9a579cdde550",
+    "reaction_templates": "47603dca180bf2144778eda69d45f1c5288e3e855966f2611a2f1dffe8421bc8"
+  },
+  "public_output_checksums": {
+    "data/example/syngenmol_demo_warhead_constraint_building_blocks.csv": "d76469df741048ac065d777047f68e3b3a4387edaa3bba9597883730a5f48df9",
+    "data/example/syngenmol_demo_warhead_constraint_anchor_names.txt": "13a7135e7b8fdea043a0c4e8cf4577280d13e3d758e418d3f29e2d519e94967d",
+    "data/example/syngenmol_demo_warhead_constraint_anchors.csv": "6d09c3d072a22fe934ea06ce4b92820aa3e3a87d1ac83b25b155c356677fb97c",
+    "data/example/syngenmol_demo_warhead_constraint_warmup_trajectories.csv": "428e8507d78ef776880274ed7571f10e3d72eca8c4e3e89266c1df9ec37bc193",
+    "outputs/syngenmol_demo_warhead_constraint/results/generated_molecules_geodiff.csv": "d4c484a3a62554bb53472fababd6847e47145fcddfb1026c1992abca938da1ce",
+    "outputs/syngenmol_demo_warhead_constraint/results/ppo_score_curve.csv": "39e7169978e6e03a1b2f1c08e07a693a630dde2111a912996a5f5027c760d6ba",
+    "outputs/syngenmol_demo_warhead_constraint/results/run_summary.json": "03395c02b946588fe16e3ca97cc033a4dce0f3448c067572e1234648ac8369be"
+  },
+  "scope": {
+    "supplier_identifiers_included": false,
+    "source_to_anonymized_mapping_included": false,
+    "intended_as_complete_catalog": false,
+    "intended_as_unbiased_benchmark": false
+  },
+  "note": "Paths in public_output_checksums are relative to the repository root. The intermediate primary-amine inventory and the added-amine subset are not redistributed; anchor_origin in syngenmol_demo_warhead_constraint_anchors.csv records the same provenance, and the 10 multi-primary-amine entries excluded from the anchor set are counted above."
+}
