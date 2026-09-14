@@ -2,6 +2,12 @@
 
 SynGenMol is a goal-directed framework for synthesizable molecular generation. It assembles products from building blocks and reaction SMARTS templates, masks chemically incompatible choices during decoding, and optimizes a compact autoregressive policy with PPO against a task-specific molecular oracle.
 
+![Overview of the SynGenMol framework: constrained autoregressive generation of building-block sequences, deterministic assembly into products through curated reaction templates, PPO optimization against a scoring oracle, and the dynamic masking layer that enforces chemical validity and project constraints](https://github.com/molecularinformatics/SynGenMol/raw/main/docs/figures/SynGenMol_framework.png)
+
+**Overview of the SynGenMol framework.** Molecular design is treated as the sequential selection of building blocks inside a curated reaction-template space, combining a decoder-only Transformer, dynamic chemical-compatibility masking, and goal-directed reinforcement learning to produce synthesizable candidates together with their synthetic routes. **(A) Generation.** A GPT-style decoder-only Transformer predicts the next building-block token from the route prefix selected so far; masking is applied before sampling, so only reaction-feasible and constraint-satisfying blocks can be drawn. **(B) Sequence-to-product conversion.** The generated sequence is assembled deterministically by applying the curated reaction templates in turn, yielding the final product along with its virtual synthetic route. **(C) Goal-directed optimization.** Products are scored by a task-specific oracle, and PPO uses that feedback to update the policy, closing a generate–evaluate–update loop. **(D) Flexible constraints.** The masking layer can be reconfigured to restrict generation to a project-defined reaction subset or to require building blocks carrying a specified substructure or functional handle, focusing oracle-guided optimization on a user-specified, reaction-compatible design space.
+
+The vector original is [`docs/figures/SynGenMol_framework.pdf`](docs/figures/SynGenMol_framework.pdf).
+
 This release contains two runnable PED-GeoDiff demonstrations that share one code path, one reaction-template asset, and one anonymized building-block pool. Both ship their published results so the numbers in the documentation can be checked without a GPU.
 
 **Unconstrained generation** is the baseline workflow: 2,000 building blocks with free choice of the first building block. Its published run is in [`outputs/syngenmol_demo_unconstraint/results/`](outputs/syngenmol_demo_unconstraint/results/).
@@ -109,7 +115,7 @@ At the demonstration size a complete warm-up plus 500 PPO updates takes about 37
 ```text
 # Shared assets
 data/reactions/syngenmol_reactions_v1.smi                               180 ordered reaction SMARTS records
-docs/figures/                                                           the two published PPO score curves and the script that draws them
+docs/figures/                                                           the framework overview figure, the two published PPO score curves, and the script that draws them
 docs/demonstrations.md                                                  inputs, settings, workflow, and reference results for both demonstrations
 docs/restore_warhead.py                                                 post-generation Boc removal and crotonamide warhead installation
 
