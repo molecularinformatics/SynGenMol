@@ -14,9 +14,16 @@ The constrained demonstration is the same three commands as the unconstrained on
 
 In both demonstrations the policy learns to sample higher-scoring products. Each figure below plots, over the 500 PPO updates of the published run, the mean PED-GeoDiff score of the 64-trajectory rollout batch and the highest score in that batch; the two share axis limits and can be read against each other.
 
-![PPO score curve for the unconstrained demonstration: batch mean and batch maximum PED-GeoDiff score over 500 PPO updates](https://github.com/molecularinformatics/SynGenMol/raw/main/docs/figures/ppo_curve_unconstrained.png)
-
-![PPO score curve for the warhead-protected demonstration: batch mean and batch maximum PED-GeoDiff score over 500 PPO updates](https://github.com/molecularinformatics/SynGenMol/raw/main/docs/figures/ppo_curve_warhead_constrained.png)
+<table>
+  <tr>
+    <td width="50%"><img width="100%" src="https://github.com/molecularinformatics/SynGenMol/raw/main/docs/figures/ppo_curve_unconstrained.png" alt="PPO score curve for the unconstrained demonstration: batch mean and batch maximum PED-GeoDiff score over 500 PPO updates"></td>
+    <td width="50%"><img width="100%" src="https://github.com/molecularinformatics/SynGenMol/raw/main/docs/figures/ppo_curve_warhead_constrained.png" alt="PPO score curve for the warhead-protected demonstration: batch mean and batch maximum PED-GeoDiff score over 500 PPO updates"></td>
+  </tr>
+  <tr>
+    <td align="center"><sub>Unconstrained generation</sub></td>
+    <td align="center"><sub>Warhead-protected generation</sub></td>
+  </tr>
+</table>
 
 Vendor catalogs, trained checkpoints, full PPO metric histories, prepared search spaces, and third-party model assets are not included. Prepared search spaces regenerate deterministically from the shipped inputs, so published token IDs match on a re-run.
 
